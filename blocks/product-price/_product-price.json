@@ -1,0 +1,58 @@
+{
+  "definitions": [
+    {
+      "title": "Product Price",
+      "id": "product-price",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Product Price",
+              "model": "product-price"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "product-price",
+      "fields": [
+        {
+          "component": "text",
+          "name": "technicalName",
+          "label": "Technical Name",
+          "description": "The SAP product technical name/ID (e.g., 000000000008901023)",
+          "required": true
+        },
+        {
+          "component": "select",
+          "name": "locale",
+          "label": "Locale",
+          "options": [
+            { "name": "English (US)", "value": "en_us" },
+            { "name": "English (UK)", "value": "en_gb" },
+            { "name": "German", "value": "de_de" },
+            { "name": "French", "value": "fr_fr" },
+            { "name": "Spanish", "value": "es_es" }
+          ]
+        },
+        {
+          "component": "select",
+          "name": "country",
+          "label": "Country",
+          "options": [
+            { "name": "Romania", "value": "RO" },
+            { "name": "United States", "value": "US" },
+            { "name": "Germany", "value": "DE" },
+            { "name": "France", "value": "FR" },
+            { "name": "United Kingdom", "value": "GB" }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

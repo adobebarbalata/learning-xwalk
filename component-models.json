@@ -214,5 +214,42 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "product-price",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "technicalName",
+        "label": "Technical Name",
+        "description": "The SAP product technical name/ID (e.g., 000000000008901023)",
+        "required": true
+      },
+      {
+        "component": "select",
+        "name": "locale",
+        "label": "Locale",
+        "options": [
+          { "name": "English (US)", "value": "en_us" },
+          { "name": "English (UK)", "value": "en_gb" },
+          { "name": "German", "value": "de_de" },
+          { "name": "French", "value": "fr_fr" },
+          { "name": "Spanish", "value": "es_es" }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "country",
+        "label": "Country",
+        "options": [
+          { "name": "Romania", "value": "RO" },
+          { "name": "United States", "value": "US" },
+          { "name": "Germany", "value": "DE" },
+          { "name": "France", "value": "FR" },
+          { "name": "United Kingdom", "value": "GB" }
+        ]
+      }
+    ]
   }
 ]

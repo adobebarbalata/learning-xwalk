@@ -3,3 +3,7 @@ mountpoints:
     url: "https://author-p181352-e1907005.adobeaemcloud.com/bin/franklin.delivery/adobebarbalata/learning-xwalk/main"
     type: "markup"
     suffix: ".html"
+  /sap-product-price:
+    url: "https://www.sap.com/api/edge/pdp/product-price"
+    type: "json"
+    passthrough: true

@@ -17,51 +17,17 @@ function formatPrice(price, currency = 'USD', locale = 'en-US') {
   }).format(price);
 }
 
-/**
- * Check if running in local development
- * @returns {boolean}
- */
-function isLocalDev() {
-  return window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-}
-
-/**
- * Mock data for local development (SAP API doesn't support CORS)
- * Replace with actual API response structure once known
- */
-function getMockProductData(technicalName) {
-  return {
-    technicalName,
-    productName: 'SAP Product Sample',
-    description: 'This is mock data for local development. Deploy to .page/.live to see real SAP data.',
-    price: 1299.99,
-    listPrice: 1499.99,
-    currency: 'USD',
-    availability: 'IN_STOCK',
-    discountPercentage: 13,
-    sku: technicalName,
-  };
-}
+const SAP_API_BASE = 'https://www.sap.com/api/edge/pdp/product-price';
 
 /**
  * Fetch product price data from the SAP API
- * Uses mock data for local dev (CORS blocked), BYOM endpoint for production
  * @param {string} technicalName - The product technical name/ID
  * @param {string} locale - Locale (default: 'en_us')
  * @param {string} country - Country code (default: 'RO')
  * @returns {Promise<Object>} Product price data
  */
 async function fetchProductPrice(technicalName, locale = 'en_us', country = 'RO') {
-  if (isLocalDev()) {
-    // Local development: SAP API blocks CORS, use mock data
-    // eslint-disable-next-line no-console
-    console.info('[Product Price] Using mock data for local development. Deploy to test with real SAP API.');
-    return getMockProductData(technicalName);
-  }
-
-  // Production: use BYOM endpoint configured in fstab.yaml
-  // Query params are passed through to the SAP API
-  const url = `/sap-product-price?technical-name=${technicalName}&locale=${locale}&country=${country}`;
+  const url = `${SAP_API_BASE}?technical-name=${technicalName}&locale=${locale}&country=${country}`;
   const response = await fetch(url);
 
   if (!response.ok) {

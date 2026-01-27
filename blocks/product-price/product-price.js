@@ -17,7 +17,20 @@ function formatPrice(price, currency = 'USD', locale = 'en-US') {
   }).format(price);
 }
 
-const SAP_API_BASE = 'https://www.sap.com/api/edge/pdp/product-price';
+// SAP API endpoint - Direct call (may have CORS issues)
+const SAP_API_DIRECT = 'https://www.sap.com/api/edge/pdp/product-price';
+
+// Cloudflare Worker proxy URL - Deploy workers/sap-proxy.js and update this URL
+// Example: 'https://sap-proxy.your-account.workers.dev'
+const SAP_API_PROXY = null; // Set your worker URL here after deploying
+
+/**
+ * Get the API base URL
+ * Uses proxy if configured, otherwise direct SAP API
+ */
+function getApiBase() {
+  return SAP_API_PROXY || SAP_API_DIRECT;
+}
 
 /**
  * Fetch product price data from the SAP API
@@ -27,7 +40,12 @@ const SAP_API_BASE = 'https://www.sap.com/api/edge/pdp/product-price';
  * @returns {Promise<Object>} Product price data
  */
 async function fetchProductPrice(technicalName, locale = 'en_us', country = 'RO') {
-  const url = `${SAP_API_BASE}?technical-name=${technicalName}&locale=${locale}&country=${country}`;
+  const apiBase = getApiBase();
+  const url = `${apiBase}?technical-name=${technicalName}&locale=${locale}&country=${country}`;
+
+  // eslint-disable-next-line no-console
+  console.log('[Product Price] Fetching from:', url);
+
   const response = await fetch(url);
 
   if (!response.ok) {

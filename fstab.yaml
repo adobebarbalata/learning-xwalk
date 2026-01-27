@@ -3,7 +3,8 @@ mountpoints:
     url: "https://author-p181352-e1907005.adobeaemcloud.com/bin/franklin.delivery/adobebarbalata/learning-xwalk/main"
     type: "markup"
     suffix: ".html"
-  /sap-product-price:
-    url: "https://www.sap.com/api/edge/pdp/product-price"
-    type: "json"
-    passthrough: true
+
+# Note: For external JSON APIs like SAP, use one of these approaches:
+# 1. Direct fetch from block (if CORS allowed)
+# 2. Cloudflare Worker proxy (see /workers/sap-proxy.js)
+# 3. AEM backend service
